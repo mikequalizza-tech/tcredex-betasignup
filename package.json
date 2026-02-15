@@ -14,7 +14,7 @@
     "aos": "^2.3.4",
     "lucide-react": "^0.468.0",
     "mapbox-gl": "^3.9.4",
-    "next": "15.1.6",
+    "next": "15.5.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-map-gl": "^7.1.9"
