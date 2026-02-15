@@ -1,0 +1,525 @@
+---
+title: "tCredex System Overview"
+updatedAt: "2026-01-26"
+summary: "A complete site map and explanation of how all parts of tCredex work together."
+image: "/images/Tax Credit Images/The Data Driven Developer.jpg"
+---
+
+## Platform Architecture
+
+tCredex is built around three core systems that work together:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         tCredex                              │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
+│   │    MAP      │    │   INTAKE    │    │  MATCHING   │    │
+│   │  (Data)     │───▶│   (Input)   │───▶│  (Engine)   │    │
+│   └─────────────┘    └─────────────┘    └─────────────┘    │
+│          │                  │                  │            │
+│          ▼                  ▼                  ▼            │
+│   ┌─────────────────────────────────────────────────────┐  │
+│   │              MARKETPLACE (Discovery)                 │  │
+│   └─────────────────────────────────────────────────────┘  │
+│                            │                                │
+│                            ▼                                │
+│   ┌─────────────────────────────────────────────────────┐  │
+│   │              CLOSING ROOM (Execution)                │  │
+│   └─────────────────────────────────────────────────────┘  │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Site Map
+
+### Public Pages (No Login Required)
+
+#### Marketing & Information
+| Page | URL | Purpose |
+|------|-----|---------|
+| Home | `/` | Landing page, platform overview |
+| About | `/about` | Company and mission |
+| Features | `/features` | Platform features |
+| How It Works | `/how-it-works` | Platform explanation |
+| Who We Serve | `/who-we-serve` | Target audience |
+| Founders | `/founders` | Founders page |
+| Pricing | `/pricing` | Pricing information |
+| FAQ | `/faq` | Frequently asked questions |
+| Terms | `/terms` | Terms of service |
+| Privacy | `/privacy` | Privacy policy |
+
+#### Authentication
+| Page | URL | Purpose |
+|------|-----|---------|
+| Sign In | `/signin` | Login for existing users |
+| Sign Up | `/signup` | Create new account |
+| Sign Up Success | `/signup/success` | Account creation success page |
+| Reset Password | `/reset-password` | Password reset |
+| Onboarding | `/onboarding` | Onboarding flow |
+
+#### Content
+| Page | URL | Purpose |
+|------|-----|---------|
+| Blog | `/blog` | Tax credit industry articles |
+| Blog Post | `/blog/[slug]` | Individual blog post |
+| Help Center | `/help` | Documentation and guides |
+| Help Article | `/help/[slug]` | Individual help article |
+| Contact | `/contact` | Support and inquiries |
+| Contact AIV | `/contact-aiv` | Contact AIV team |
+| Support | `/support` | Support page |
+| Support Request | `/support/request` | Submit support request |
+| Newsletter | `/newsletter` | Newsletter signup |
+
+#### Programs
+| Page | URL | Purpose |
+|------|-----|---------|
+| Programs | `/programs` | Program overview |
+| NMTC | `/programs/nmtc` | NMTC program details |
+| HTC | `/programs/htc` | HTC program details |
+| LIHTC | `/programs/lihtc` | LIHTC program details |
+| Opportunity Zones | `/programs/oz` | Opportunity Zones details |
+| Brownfield | `/programs/brownfield` | Brownfield program details |
+
+#### Utilities
+| Page | URL | Purpose |
+|------|-----|---------|
+| Matching | `/matching` | Matching engine overview |
+| AutoMatch | `/automatch` | AutoMatch AI overview |
+| Tract Map | `/tract-map` | Tract mapping tool |
+| Ledger Integrity | `/ledger-integrity` | Ledger verification tool |
+| Role Test | `/role-test` | Role testing page |
+
+### Map & Research (Browse Without Login)
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Map | `/map` | Interactive eligibility map |
+| Marketplace | `/deals` | Browse deals, CDEs, and investors (role-based view) |
+| Deal Detail | `/deals/[id]` | View deal details |
+| Deal Card Preview | `/deals/[id]/card` | Preview DealCard |
+| Deal Profile | `/deals/[id]/profile` | Full deal profile view |
+| CDE Directory | `/cde` | Browse CDEs with allocation |
+| CDE Profile | `/cde/[slug]` | Public CDE profile page |
+| Investor Directory | `/investor` | Browse active investors |
+| Investor Profile | `/investor/[slug]` | Public investor profile page |
+
+### Sponsor Pages (Requires Sponsor Login)
+
+#### Dashboard & Management
+| Page | URL | Purpose |
+|------|-----|---------|
+| Dashboard | `/dashboard` | Sponsor home base with stats and interest data |
+| Pipeline | `/dashboard/pipeline` | View all deals in various stages |
+| Organization Info | `/dashboard/organization` | Manage organization profile and preferences |
+| Team | `/dashboard/team` | Team member management |
+| Settings | `/dashboard/settings` | Account settings |
+| Notifications | `/dashboard/notifications` | Notifications center |
+
+#### Projects
+| Page | URL | Purpose |
+|------|-----|---------|
+| Projects | `/dashboard/projects` | Projects listing |
+| New Project | `/dashboard/projects/new` | Create new project |
+| Project Detail | `/dashboard/projects/[id]` | Project detail |
+| Project Timeline | `/dashboard/projects/[id]/timeline` | Project timeline |
+| Project Matches | `/dashboard/projects/[id]/matches` | View CDE/Investor matches |
+| Project Documents | `/dashboard/projects/[id]/documents` | Project documents |
+
+#### Deal Submission
+| Page | URL | Purpose |
+|------|-----|---------|
+| Intake Form | `/intake` | Submit new project (also accessible via `/deals/new`) |
+| New Deal | `/deals/new` | New deal creation (redirects to intake) |
+
+#### Marketplace & Deals
+| Page | URL | Purpose |
+|------|-----|---------|
+| Marketplace | `/deals` | Browse CDEs and investors |
+| Deal Detail | `/deals/[id]` | View deal details |
+| Deal Edit | `/deals/[id]/edit` | Edit deal information (own deals only) |
+| Deal Card Preview | `/deals/[id]/card` | Preview DealCard |
+| Deal Profile | `/deals/[id]/profile` | Full deal profile view |
+| Deal Room Channel | `/deals/[id]/room/[channelId]` | Deal room channel |
+
+#### Documents
+| Page | URL | Purpose |
+|------|-----|---------|
+| Documents | `/dashboard/documents` | Document management |
+| New Document | `/dashboard/documents/new` | Create new document |
+| Upload Document | `/dashboard/documents/upload` | Upload document |
+| Document Detail | `/dashboard/documents/[id]` | View document |
+| Shared Documents | `/dashboard/documents/shared` | Shared documents |
+
+#### Closing Room
+| Page | URL | Purpose |
+|------|-----|---------|
+| Closing Room | `/closing-room` | Closing room workspace |
+| Closing Room Detail | `/closing-room/[id]` | Specific deal closing room |
+
+#### Messaging
+| Page | URL | Purpose |
+|------|-----|---------|
+| Messages | `/messages` | Messaging center |
+
+### CDE Pages (Requires CDE Login)
+
+#### Dashboard & Management
+| Page | URL | Purpose |
+|------|-----|---------|
+| Dashboard | `/dashboard` | CDE home base |
+| Pipeline | `/dashboard/pipeline` | Projects in evaluation (role-filtered) |
+| Allocations | `/dashboard/allocations` | Track allocation balance |
+| Organization Info | `/dashboard/organization` | Manage CDE profile and matching criteria |
+| AutoMatch AI | `/dashboard/automatch` | AI-powered deal matching |
+| Team | `/dashboard/team` | Team member management |
+| Settings | `/dashboard/settings` | Account settings |
+| Notifications | `/dashboard/notifications` | Notifications center |
+
+#### Profile
+| Page | URL | Purpose |
+|------|-----|---------|
+| CDE Profile | `/cde/[slug]` | Public CDE profile page |
+| CDE Profile Edit | `/cde/profile/edit` | Edit CDE profile |
+
+#### Marketplace & Deals
+| Page | URL | Purpose |
+|------|-----|---------|
+| Marketplace | `/deals` | Browse available projects/deals |
+| Deal Detail | `/deals/[id]` | Evaluate DealCard |
+| Deal Profile | `/deals/[id]/profile` | Full deal profile view |
+| Deal Room Channel | `/deals/[id]/room/[channelId]` | Deal room channel |
+
+#### Documents
+| Page | URL | Purpose |
+|------|-----|---------|
+| Documents | `/dashboard/documents` | Document management |
+| New Document | `/dashboard/documents/new` | Create new document |
+| Upload Document | `/dashboard/documents/upload` | Upload document |
+| Document Detail | `/dashboard/documents/[id]` | View document |
+| Shared Documents | `/dashboard/documents/shared` | Shared documents |
+
+#### Closing Room
+| Page | URL | Purpose |
+|------|-----|---------|
+| Closing Room | `/closing-room` | Closing room workspace |
+| Closing Room Detail | `/closing-room/[id]` | Specific deal closing room |
+
+#### Messaging
+| Page | URL | Purpose |
+|------|-----|---------|
+| Messages | `/messages` | Messaging center |
+
+### Investor Pages (Requires Investor Login)
+
+#### Dashboard & Management
+| Page | URL | Purpose |
+|------|-----|---------|
+| Dashboard | `/dashboard` | Investor home base |
+| Pipeline | `/dashboard/pipeline` | Deals in evaluation (role-filtered) |
+| Portfolio | `/dashboard/portfolio` | Closed investments |
+| Organization Info | `/dashboard/organization` | Manage investor profile and investment criteria |
+| AutoMatch AI | `/dashboard/automatch` | AI-powered deal matching |
+| Team | `/dashboard/team` | Team member management |
+| Settings | `/dashboard/settings` | Account settings |
+| Notifications | `/dashboard/notifications` | Notifications center |
+
+#### Profile
+| Page | URL | Purpose |
+|------|-----|---------|
+| Investor Profile | `/investor/[slug]` | Public investor profile page |
+
+#### Marketplace & Deals
+| Page | URL | Purpose |
+|------|-----|---------|
+| Marketplace | `/deals` | Browse available opportunities |
+| Deal Detail | `/deals/[id]` | Evaluate opportunity |
+| Deal Profile | `/deals/[id]/profile` | Full deal profile view |
+| Deal Room Channel | `/deals/[id]/room/[channelId]` | Deal room channel |
+
+#### Documents
+| Page | URL | Purpose |
+|------|-----|---------|
+| Documents | `/dashboard/documents` | Document management |
+| New Document | `/dashboard/documents/new` | Create new document |
+| Upload Document | `/dashboard/documents/upload` | Upload document |
+| Document Detail | `/dashboard/documents/[id]` | View document |
+| Shared Documents | `/dashboard/documents/shared` | Shared documents |
+
+#### Closing Room
+| Page | URL | Purpose |
+|------|-----|---------|
+| Closing Room | `/closing-room` | Closing room workspace |
+| Closing Room Detail | `/closing-room/[id]` | Specific deal closing room |
+
+#### Messaging
+| Page | URL | Purpose |
+|------|-----|---------|
+| Messages | `/messages` | Messaging center |
+
+### Admin Pages (Platform Admins Only)
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Admin Dashboard | `/admin` | Platform overview |
+| Admin Users | `/admin/users` | User management |
+| Admin Deals | `/admin/deals` | All deals management |
+| Admin CDEs | `/admin/cdes` | CDE management |
+| Admin Investors | `/admin/investors` | Investor management |
+| Admin Reports | `/admin/reports` | Platform reports |
+| Admin Settings | `/admin/settings` | Admin settings |
+| Admin Knowledge | `/admin/knowledge` | Knowledge base management |
+| Admin Knowledge Setup | `/admin/knowledge/setup` | Knowledge base setup |
+| Admin Knowledge Upload | `/admin/knowledge/upload` | Upload knowledge documents |
+| Admin Map Debug | `/admin/map-debug` | Map debugging tools |
+
+---
+
+## Route Notes
+
+### Route Parameters
+
+**Dynamic Routes:**
+- `/deals/[id]` - `id` is the deal UUID
+- `/deals/[id]/room/[channelId]` - `id` is deal UUID, `channelId` is channel identifier
+- `/dashboard/projects/[id]` - `id` is project UUID
+- `/dashboard/documents/[id]` - `id` is document UUID
+- `/closing-room/[id]` - `id` is closing room UUID
+- `/cde/[slug]` - `slug` is CDE slug
+- `/investor/[slug]` - `slug` is investor slug
+- `/blog/[slug]` - `slug` is blog post slug
+- `/help/[slug]` - `slug` is help article slug
+
+**Query Parameters:**
+- `/intake?draftId=xxx` - Load specific draft
+- `/intake?dealId=xxx` - Edit mode for submitted deal
+- `/intake?new=true` - Skip draft check (force new)
+
+### Route Access Notes
+
+- **Marketplace (`/deals`)**: Shows different content based on role:
+  - Sponsors see: CDEs and Investors
+  - CDEs see: Available deals/projects
+  - Investors see: Available opportunities
+  - Public users see: Public deals only
+
+- **Dashboard (`/dashboard`)**: Content varies by role:
+  - Sponsors: Stats, interest data, deals pipeline
+  - CDEs: Allocation tracking, deal pipeline, AutoMatch
+  - Investors: Portfolio, deal pipeline, AutoMatch
+
+- **Pipeline (`/dashboard/pipeline`)**: Role-filtered:
+  - Sponsors: Their own deals in all stages
+  - CDEs: Deals they've engaged with
+  - Investors: Deals they've expressed interest in
+
+### Deprecated/Legacy Routes
+
+These routes may exist but are not the primary paths:
+- `/marketplace` → Use `/deals` instead
+- `/projects` → Use `/dashboard/projects` (sponsors)
+- `/pipeline` → Use `/dashboard/pipeline`
+- `/allocation` → Use `/dashboard/allocations` (CDEs)
+- `/matches` → Use `/dashboard/projects/[id]/matches` (sponsors)
+- `/closing/[id]` → Use `/closing-room/[id]`
+
+---
+
+## Core Systems Explained
+
+### 1. The Map System
+
+**What it is:** Interactive map showing census tract eligibility across all programs.
+
+**What it does:**
+- Displays NMTC eligibility for every tract
+- Shows Opportunity Zones
+- Highlights QCTs and DDAs for LIHTC
+- Identifies state program eligibility
+- Provides distress metrics (poverty, MFI, unemployment)
+
+**How it connects:**
+- Intake Form geocodes addresses → Map provides tract data
+- AutoMatch uses tract data → Geographic matching
+- DealCards display tract info → Eligibility verification
+
+### 2. The Intake System
+
+**What it is:** Dynamic form that collects project information and generates DealCards.
+
+**What it does:**
+- Guides Sponsors through project details
+- Auto-detects eligibility from address
+- Adapts fields based on selected programs
+- Calculates completion tier
+- Generates standardized DealCard
+
+**How it connects:**
+- Address entry → Map lookup → Eligibility auto-fill
+- Program selection → Dynamic field display
+- Completion → DealCard generation → Marketplace listing
+
+### 3. The Matching System (AutoMatch)
+
+**What it is:** AI-driven engine that connects projects with CDEs and Investors.
+
+**What it does:**
+- Analyzes project characteristics
+- Compares against CDE/Investor preferences
+- Scores compatibility
+- Notifies parties of strong matches
+
+**How it connects:**
+- DealCard data → Match analysis
+- CDE/Investor profiles → Criteria comparison
+- Match scores → Notifications → Discovery
+
+### 4. The Marketplace
+
+**What it is:** Discovery platform where all parties find each other.
+
+**What it does:**
+- Lists all published DealCards
+- Shows CDE profiles with allocation
+- Displays Investor profiles with criteria
+- Enables filtering and search
+- Facilitates initial interest expression
+
+**How it connects:**
+- Published DealCards appear automatically
+- AutoMatch surfaces relevant listings
+- Interest expressions trigger communication
+
+### 5. The Closing Room
+
+**What it is:** Secure workspace for due diligence and deal execution.
+
+**What it does:**
+- Central document repository
+- Checklist tracking
+- Threaded messaging
+- LOI and commitment management
+- Status tracking to close
+
+**How it connects:**
+- Mutual interest → Closing Room opens
+- Documents uploaded → Checklist progress
+- LOI/Commitment issued → Deal advances
+- All conditions met → Deal closes
+
+---
+
+## Data Flow Through the System
+
+### Project Submission Flow
+
+```
+Sponsor enters address
+        │
+        ▼
+Map geocodes → returns tract data
+        │
+        ▼
+Intake Form auto-populates eligibility
+        │
+        ▼
+Sponsor completes required fields
+        │
+        ▼
+Tier 1 reached → DealCard generated
+        │
+        ▼
+DealCard published to Marketplace
+        │
+        ▼
+AutoMatch analyzes → notifies CDEs/Investors
+```
+
+### Match to Close Flow
+
+```
+AutoMatch identifies compatible parties
+        │
+        ▼
+Notifications sent to both sides
+        │
+        ▼
+Mutual interest expressed
+        │
+        ▼
+Closing Room opens
+        │
+        ▼
+Documents exchanged, checklists tracked
+        │
+        ▼
+LOI issued (NMTC) or Commitment issued (direct)
+        │
+        ▼
+Terms negotiated and accepted
+        │
+        ▼
+Final conditions satisfied
+        │
+        ▼
+Deal funded → marked closed
+```
+
+---
+
+## User Journeys by Role
+
+### Sponsor Journey
+
+1. Create account → Select Sponsor type
+2. Submit project → Complete Intake Form
+3. Reach Tier 1 → DealCard goes live
+4. Receive matches → Review CDE/Investor interest
+5. Express interest → Communication unlocks
+6. Enter Closing Room → Upload documents
+7. Receive LOI/Commitment → Negotiate terms
+8. Close deal → Receive financing
+
+### CDE Journey
+
+1. Create account → Select CDE type
+2. Complete profile → Set allocation and preferences
+3. Receive matches → Review project DealCards
+4. Express interest → Communication unlocks
+5. Enter Closing Room → Evaluate documents
+6. Issue LOI → Set terms
+7. Bring Investor → Coordinate commitment
+8. Close deal → Deploy allocation
+
+### Investor Journey
+
+1. Create account → Select Investor type
+2. Complete profile → Set investment criteria
+3. Receive matches → Review opportunities
+4. Express interest → Communication unlocks
+5. Enter Closing Room → Conduct due diligence
+6. Issue commitment → Set terms
+7. Close deal → Fund investment
+8. Track portfolio → Monitor compliance
+
+---
+
+## System Integration Points
+
+| Integration | Purpose |
+|-------------|---------|
+| Map ↔ Intake | Address geocoding, eligibility lookup |
+| Intake ↔ Marketplace | DealCard publication |
+| Profiles ↔ AutoMatch | Matching criteria |
+| AutoMatch ↔ Notifications | Match alerts |
+| Marketplace ↔ Closing Room | Interest → Due diligence |
+| Closing Room ↔ Portfolio | Deal completion tracking |
+
+---
+
+## Need Help?
+
+Contact **support@tcredex.com** for system questions.

@@ -1,0 +1,368 @@
+---
+title: "How the Intake Form Drives Everything"
+updatedAt: "2025-01-19"
+summary: "Understanding how the dynamic Intake Form powers eligibility, matching, and the entire tCredex platform."
+image: "/images/Tax Credit Images/nmtc-financing-structure-overview-l.jpg"
+---
+
+## The Intake Form is the Engine
+
+Every deal on tCredex starts with the Intake Form. It's not just data collection—it's the engine that powers:
+
+- Eligibility determination
+- DealCard generation
+- AutoMatch scoring
+- Marketplace visibility
+- Due diligence preparation
+
+Understanding how the Intake Form works helps you maximize your results.
+
+---
+
+## Dynamic Form Behavior
+
+The Intake Form adapts based on your inputs. Different programs show different fields.
+
+### Program Selection Changes Everything
+
+When you select **NMTC**:
+- QALICB eligibility tests appear
+- Leverage structure options show
+- CDE matching activates
+
+When you select **LIHTC**:
+- Unit count and AMI targeting appear
+- 4% vs 9% credit selection shows
+- Housing-specific fields activate
+- **NMTC option becomes blocked** (compliance rule)
+
+When you select **HTC**:
+- Historic designation status appears
+- QRE (Qualified Rehabilitation Expenditure) fields show
+- Part 1/2/3 status tracking activates
+
+When you select **OZ**:
+- Investment timing fields appear
+- Substantial improvement questions show
+- Holding period tracking activates
+
+### Location Changes Eligibility
+
+When you enter an address:
+
+1. System geocodes to coordinates
+2. Coordinates map to census tract
+3. Tract data returns from the Map
+4. Eligibility auto-populates:
+   - NMTC eligible? Yes/No
+   - Severely distressed? Yes/No
+   - Opportunity Zone? Yes/No
+   - QCT? Yes/No
+   - State programs available? Listed
+
+**You don't research eligibility. The system tells you instantly.**
+
+---
+
+## Data Flow: Address to DealCard
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    ADDRESS ENTERED                           │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    GEOCODING                                 │
+│         Address → Latitude/Longitude → Census Tract          │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    MAP LOOKUP                                │
+│         Tract GEOID → Eligibility Flags → Distress Data      │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    AUTO-POPULATION                           │
+│    NMTC Eligible: ✓    Poverty Rate: 32%                    │
+│    Severely Distressed: ✓    MFI: 58%                       │
+│    Opportunity Zone: ✓    Unemployment: 12%                  │
+│    QCT: ✗    State Programs: LA NMTC, LA HTC                │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    DEALCARD GENERATED                        │
+│         All eligibility data embedded in DealCard            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Section-by-Section Breakdown
+
+### 1. Project Information
+
+**What you enter:**
+- Project name
+- Project type (healthcare, education, housing, etc.)
+- Description
+- Venture type (real estate vs. business)
+
+**How it drives the system:**
+- Project type → Sector matching for CDEs
+- Description → DealCard summary
+- Venture type → NMTC structure implications
+
+### 2. Location & Census Tract
+
+**What you enter:**
+- Street address
+- City, State, ZIP
+
+**How it drives the system:**
+- Address → Geocoding → Tract lookup
+- Tract → Eligibility flags for ALL programs
+- Tract → Distress metrics for scoring
+- State → Available state programs
+
+### 3. Tax Credit Programs
+
+**What you select:**
+- NMTC, LIHTC, HTC, OZ, State credits
+- Federal vs. State level
+
+**How it drives the system:**
+- Program selection → Dynamic field display
+- NMTC selected → CDE matching activates
+- Direct programs → Investor matching activates
+- **LIHTC + NMTC blocked** → Compliance protection
+
+### 4. Project Timeline
+
+**What you enter:**
+- Construction start date
+- Projected completion
+- Target closing date
+
+**How it drives the system:**
+- Timeline → CDE deployment deadline matching
+- Readiness → Match scoring factor
+- Close date → Deal velocity indicator
+
+### 5. QALICB Tests (NMTC Only)
+
+**What you complete:**
+- Nine pass/fail eligibility tests
+- Gross income test
+- Tangible property test
+- Employee services test
+- Prohibited business check
+
+**How it drives the system:**
+- All tests pass → NMTC eligible confirmed
+- Failed tests → Warning displayed
+- Results → DealCard compliance section
+
+### 6. Sponsor Information
+
+**What you enter:**
+- Organization name
+- Contact information
+- Track record (optional)
+
+**How it drives the system:**
+- Sponsor profile → DealCard attribution
+- Track record → Credibility indicator
+- Contact → Communication routing
+
+### 7. Total Project Cost
+
+**What you enter:**
+- Overall project budget
+- Cost breakdown (if known):
+  - Land/acquisition
+  - Construction
+  - Soft costs
+  - Contingency
+  - Developer fee
+
+**How it drives the system:**
+- TPC → CDE deal size matching
+- TPC → Investor investment size matching
+- Cost breakdown → Financial evaluation
+
+### 8. Financing Gap
+
+**What you enter:**
+- How much financing you need
+- Sources already committed
+- Gap to close
+
+**How it drives the system:**
+- Gap → QLICI request for NMTC
+- Gap → Investment amount for Investors
+- Committed sources → Deal readiness indicator
+
+### 9. Community Impact
+
+**What you enter:**
+- Jobs created/retained
+- Community benefits
+- Special designations
+- Support letters
+
+**How it drives the system:**
+- Jobs → Impact scoring for CDEs
+- Benefits → Mission alignment matching
+- Designations → Priority matching flags
+
+### 10. Environmental & Readiness
+
+**What you enter:**
+- Phase I status
+- Site control status
+- Zoning/permits
+- Construction drawings
+
+**How it drives the system:**
+- Readiness → Tier qualification
+- Readiness → Match scoring
+- Readiness → CDE timeline matching
+
+### 11. Document Uploads
+
+**What you upload:**
+- Environmental reports
+- Financial documents
+- Legal documents
+- Project materials
+
+**How it drives the system:**
+- Documents → DealCard completeness
+- Documents → Due diligence preparation
+- Documents → Tier advancement
+
+---
+
+## Tier System
+
+The Intake Form calculates your completion tier automatically:
+
+| Tier | Completion | Unlocks |
+|------|------------|---------|
+| **Tier 1** | 40% | Marketplace listing, basic matching |
+| **Tier 2** | 70% | Full profile, enhanced matching |
+| **Tier 3** | 100% | Due diligence ready, priority matching |
+
+### What Counts Toward Completion
+
+- Required fields (weighted heavily)
+- Optional fields (moderate weight)
+- Document uploads (bonus weight)
+- Quality indicators (completeness, detail)
+
+### Tier Impact on Matching
+
+```
+Tier 1 Project: Matches with 50+ score threshold
+Tier 2 Project: Matches with 40+ score threshold
+Tier 3 Project: Matches with 30+ score threshold + Priority flag
+```
+
+Higher tiers = more matches = faster deals.
+
+---
+
+## Real-Time Validation
+
+As you fill out the form, the system validates:
+
+### Eligibility Warnings
+
+- Tract not NMTC eligible → Warning displayed
+- QALICB test failed → Flag shown
+- Program conflict detected → Selection blocked
+
+### Data Quality Checks
+
+- Financing gap > TPC → Warning
+- Timeline unrealistic → Flag
+- Missing critical fields → Tier blocked
+
+### Compliance Rules
+
+- LIHTC + NMTC selected → Blocked with explanation
+- Prohibited business indicated → NMTC eligibility warning
+
+---
+
+## From Intake to Match
+
+```
+Intake Complete
+      │
+      ▼
+DealCard Generated
+      │
+      ├── Project Summary
+      ├── Eligibility Data (from Map)
+      ├── Financial Profile
+      ├── Impact Metrics
+      └── Readiness Indicators
+      │
+      ▼
+AutoMatch Analysis
+      │
+      ├── Geographic matching (tract → CDE preferences)
+      ├── Sector matching (type → CDE focus)
+      ├── Size matching (QLICI → CDE range)
+      ├── Distress matching (tract → CDE requirements)
+      └── Readiness matching (timeline → CDE deadline)
+      │
+      ▼
+Match Notifications Sent
+      │
+      ▼
+Deal Process Begins
+```
+
+---
+
+## Tips for Maximum Results
+
+### Complete Everything
+
+Every field you complete:
+- Improves match quality
+- Increases visibility
+- Signals seriousness
+
+### Be Accurate
+
+Inaccurate data leads to:
+- Poor matches
+- Wasted CDE/Investor time
+- Deal failures
+
+### Upload Documents Early
+
+Documents signal:
+- Deal readiness
+- Professionalism
+- Closing capability
+
+### Update Regularly
+
+As your project evolves:
+- Update timeline
+- Add new documents
+- Refine financials
+
+---
+
+## Need Help?
+
+Contact **support@tcredex.com** for Intake Form assistance.
