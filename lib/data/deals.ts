@@ -1,6 +1,5 @@
 export interface Deal {
   id: string;
-  project_name: string;
   projectName: string;
   census_tract?: string;
   latitude?: number;

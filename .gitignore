@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated content (built by prebuild script)
+/public/data/*.json
+/public/data/blog/*.json
+/public/data/help/*.json
