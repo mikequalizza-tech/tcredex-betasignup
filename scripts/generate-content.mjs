@@ -16,11 +16,12 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
-function parseFrontmatter(fileContent) {
+function parseFrontmatter(fileContent, filename = '') {
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(fileContent);
 
   if (!match) {
+    console.warn(`  Warning: No frontmatter found in ${filename}`);
     return {
       metadata: { title: 'Untitled', publishedAt: new Date().toISOString().split('T')[0] },
       content: fileContent.trim(),
@@ -42,6 +43,12 @@ function parseFrontmatter(fileContent) {
     metadata[key] = value;
   });
 
+  // Validate required fields for blog posts
+  if (!metadata.title) {
+    console.warn(`  Warning: Missing title in ${filename}`);
+    metadata.title = 'Untitled';
+  }
+
   return { metadata, content };
 }
 
@@ -61,18 +68,22 @@ function processDirectory(contentDir, outputDir, type) {
   const index = [];
 
   files.forEach(file => {
-    const raw = fs.readFileSync(path.join(inputPath, file), 'utf-8');
-    const { metadata, content } = parseFrontmatter(raw);
-    const slug = path.basename(file, '.mdx');
+    try {
+      const raw = fs.readFileSync(path.join(inputPath, file), 'utf-8');
+      const { metadata, content } = parseFrontmatter(raw, file);
+      const slug = path.basename(file, '.mdx');
 
-    // Individual post JSON
-    fs.writeFileSync(
-      path.join(outputPath, `${slug}.json`),
-      JSON.stringify({ slug, metadata, content }, null, 0)
-    );
+      // Individual post JSON
+      fs.writeFileSync(
+        path.join(outputPath, `${slug}.json`),
+        JSON.stringify({ slug, metadata, content }, null, 0)
+      );
 
-    // Index entry (no content — just metadata)
-    index.push({ slug, metadata });
+      // Index entry (no content — just metadata)
+      index.push({ slug, metadata });
+    } catch (error) {
+      console.error(`  Error processing ${file}:`, error.message);
+    }
   });
 
   // Sort by date (newest first)

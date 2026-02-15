@@ -561,13 +561,21 @@ export default function HomeMapWithTracts({
 
     const pins: DealPin[] = deals
       .filter(d => d.coordinates)
-      .map(d => ({
-        id: d.id,
-        name: d.projectName,
-        coordinates: d.coordinates!,
-        type: d.programType.toLowerCase() as any,
-        projectCost: d.projectCost || d.allocation * 5
-      }));
+      .map(d => {
+        const programType = d.programType.toLowerCase();
+        const validType: 'nmtc' | 'lihtc' | 'oz' = 
+          programType === 'nmtc' || programType === 'lihtc' || programType === 'oz'
+            ? programType
+            : 'nmtc'; // default fallback
+        
+        return {
+          id: d.id,
+          name: d.projectName,
+          coordinates: d.coordinates!,
+          type: validType,
+          projectCost: d.projectCost || d.allocation * 5
+        };
+      });
 
     pins.forEach((deal) => {
       const el = document.createElement('div');
