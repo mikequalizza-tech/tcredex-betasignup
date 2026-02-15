@@ -10,15 +10,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
     }
 
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // Length validation
+    if (name.trim().length > 100) {
+      return NextResponse.json({ error: 'Name must be 100 characters or less' }, { status: 400 });
+    }
+
+    if (email.trim().length > 255) {
+      return NextResponse.json({ error: 'Email must be 255 characters or less' }, { status: 400 });
+    }
+
+    // Email validation with improved regex
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(email.trim())) {
       return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
     }
 
     // Sanitize inputs
-    const sanitizedName = name.trim().substring(0, 100);
-    const sanitizedEmail = email.toLowerCase().trim().substring(0, 255);
+    const sanitizedName = name.trim();
+    const sanitizedEmail = email.toLowerCase().trim();
 
     const supabase = getSupabaseAdmin();
 
