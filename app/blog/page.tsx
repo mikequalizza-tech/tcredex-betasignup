@@ -28,7 +28,7 @@ export default function Blog() {
   useEffect(() => {
     async function loadPosts() {
       try {
-        const res = await fetch("/api/blog");
+        const res = await fetch("/data/blog-index.json");
         if (res.ok) {
           const data = await res.json();
           setPosts(data.posts || []);

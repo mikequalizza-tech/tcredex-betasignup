@@ -69,14 +69,14 @@ export default function SinglePost() {
   useEffect(() => {
     async function loadPost() {
       try {
-        const res = await fetch(`/api/blog/${slug}`);
+        const res = await fetch(`/data/blog/${slug}.json`);
         if (!res.ok) {
           setError("Post not found");
           setLoading(false);
           return;
         }
-        const data = await res.json();
-        setPost(data.post);
+        const post = await res.json();
+        setPost(post);
         setLoading(false);
       } catch {
         setError("Failed to load post");

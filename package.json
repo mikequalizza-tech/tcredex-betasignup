@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "prebuild": "node scripts/generate-content.mjs",
+    "dev": "node scripts/generate-content.mjs && next dev",
+    "build": "node scripts/generate-content.mjs && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,6 +16,7 @@
     "lucide-react": "^0.468.0",
     "mapbox-gl": "^3.9.4",
     "next": "15.5.12",
+    "pg": "^8.18.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-map-gl": "^7.1.9"
@@ -23,6 +25,7 @@
     "@tailwindcss/postcss": "^4.0.0",
     "@types/aos": "^3.0.7",
     "@types/node": "^22.0.0",
+    "@types/pg": "^8.16.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "postcss": "^8.4.49",

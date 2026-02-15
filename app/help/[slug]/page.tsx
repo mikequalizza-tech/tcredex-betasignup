@@ -29,15 +29,21 @@ export default function SingleHelp() {
   useEffect(() => {
     async function loadHelp() {
       try {
-        const res = await fetch(`/api/help/${slug}`);
+        // Fetch the article
+        const res = await fetch(`/data/help/${slug}.json`);
         if (!res.ok) {
           setError("Page not found");
           setLoading(false);
           return;
         }
-        const data = await res.json();
-        setHelp(data.help);
-        setAllHelps(data.allHelps || []);
+        const article = await res.json();
+        setHelp(article);
+        // Fetch the help index for prev/next navigation
+        const idxRes = await fetch('/data/help-index.json');
+        if (idxRes.ok) {
+          const idx = await idxRes.json();
+          setAllHelps(idx.posts || []);
+        }
         setLoading(false);
       } catch {
         setError("Failed to load page");
