@@ -30,8 +30,7 @@ export async function POST(request: NextRequest) {
       console.error('[Contact] Supabase error:', error);
     }
 
-    console.log('[Contact] Message received:', { name, email, subject, message: message.substring(0, 100) });
-
+    // Successfully stored message
     return NextResponse.json({ success: true, message: 'Message received' });
   } catch (error) {
     console.error('[Contact] Error:', error);

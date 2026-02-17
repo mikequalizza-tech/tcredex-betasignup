@@ -49,7 +49,7 @@ function MapSectionContent({
     note?: string;
   } | null>(null);
 
-  const handleAddressSelect = useCallback(async (suggestion: any) => {
+  const handleAddressSelect = useCallback(async (suggestion: { center?: [number, number]; place_name?: string }) => {
     if (suggestion?.center) {
       const [lng, lat] = suggestion.center;
       setSearchedLocation({ lat, lng });

@@ -21,7 +21,7 @@ export default function MobileMenu() {
     };
     document.addEventListener("click", clickHandler);
     return () => document.removeEventListener("click", clickHandler);
-  });
+  }, [mobileNavOpen]);
 
   useEffect(() => {
     const keyHandler = ({ key }: { key: string }): void => {
@@ -30,7 +30,7 @@ export default function MobileMenu() {
     };
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
-  });
+  }, [mobileNavOpen]);
 
   const closeMenu = () => setMobileNavOpen(false);
 

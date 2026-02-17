@@ -75,7 +75,7 @@ interface HomeMapWithTractsProps {
   onTractSelect?: (tract: TractData | null) => void;
   searchedLocation?: { lat: number; lng: number; tract?: string; address?: string } | null;
   deals?: Deal[];
-  allocations?: any[];
+  allocations?: unknown[];
 }
 
 const PIN_COLORS: Record<string, string> = {
