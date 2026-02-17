@@ -1,0 +1,92 @@
+create table public.cdes (
+  id uuid not null default extensions.uuid_generate_v4 (),
+  organization_id uuid not null,
+  certification_number character varying(50) null,
+  parent_organization character varying(255) null,
+  year_established integer null,
+  primary_contact_name character varying(255) null,
+  primary_contact_title character varying(100) null,
+  primary_contact_email character varying(255) null,
+  primary_contact_phone character varying(50) null,
+  total_allocation numeric(15, 2) null default 0,
+  remaining_allocation numeric(15, 2) null default 0,
+  deployment_deadline date null,
+  min_deal_size numeric(15, 2) null default 1000000,
+  max_deal_size numeric(15, 2) null default 15000000,
+  small_deal_fund boolean null default false,
+  service_area_type character varying(20) null default 'national'::character varying,
+  primary_states text[] null,
+  target_regions text[] null,
+  excluded_states text[] null,
+  rural_focus boolean null default false,
+  urban_focus boolean null default true,
+  native_american_focus boolean null default false,
+  underserved_states_focus boolean null default false,
+  mission_statement text null,
+  impact_priorities text[] null,
+  target_sectors text[] null,
+  special_focus text[] null,
+  preferred_project_types text[] null,
+  require_severely_distressed boolean null default false,
+  require_qct boolean null default false,
+  min_distress_score integer null,
+  min_project_cost numeric(15, 2) null,
+  max_project_cost numeric(15, 2) null,
+  min_jobs_created integer null,
+  require_community_benefits boolean null default true,
+  require_shovel_ready boolean null default false,
+  max_time_to_close integer null,
+  related_party_policy character varying(50) null default 'case-by-case'::character varying,
+  nmtc_experience boolean null default true,
+  htc_experience boolean null default false,
+  lihtc_experience boolean null default false,
+  oz_experience boolean null default false,
+  stacked_deals_preferred boolean null default false,
+  total_deals_completed integer null default 0,
+  total_qlici_deployed numeric(15, 2) null default 0,
+  average_close_time integer null,
+  status character varying(50) null default 'active'::character varying,
+  created_at timestamp with time zone null default now(),
+  updated_at timestamp with time zone null default now(),
+  constraint cdes_pkey primary key (id),
+  constraint cdes_organization_id_key unique (organization_id),
+  constraint cdes_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create index IF not exists idx_cdes_organization on public.cdes using btree (organization_id) TABLESPACE pg_default;
+
+create index IF not exists idx_cdes_status on public.cdes using btree (status) TABLESPACE pg_default;
+
+create trigger update_cdes_timestamp BEFORE
+update on cdes for EACH row
+execute FUNCTION update_updated_at ();
+
+cde_summary
+
+create table public.cde_allocations (
+  id uuid not null default extensions.uuid_generate_v4 (),
+  cde_id uuid not null,
+  type character varying(20) not null,
+  year character varying(4) not null,
+  state_code character varying(2) null,
+  awarded_amount numeric(15, 2) not null,
+  available_on_platform numeric(15, 2) not null,
+  deployed_amount numeric(15, 2) null default 0,
+  percentage_won numeric(5, 2) null,
+  deployment_deadline date null,
+  notes text null,
+  created_at timestamp with time zone null default now(),
+  updated_at timestamp with time zone null default now(),
+  constraint cde_allocations_pkey primary key (id),
+  constraint cde_allocations_cde_id_fkey foreign KEY (cde_id) references cdes (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create index IF not exists idx_cde_allocations_cde on public.cde_allocations using btree (cde_id) TABLESPACE pg_default;
+
+create index IF not exists idx_cde_allocations_type on public.cde_allocations using btree (type) TABLESPACE pg_default;
+
+create index IF not exists idx_cde_allocations_year on public.cde_allocations using btree (year) TABLESPACE pg_default;
+
+create trigger update_cde_allocations_timestamp BEFORE
+update on cde_allocations for EACH row
+execute FUNCTION update_updated_at ();

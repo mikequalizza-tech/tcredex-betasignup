@@ -1,0 +1,48 @@
+{
+  "name": "tCredex - Tax Credit Marketplace",
+  "short_name": "tCredex",
+  "description": "AI-powered marketplace for NMTC, LIHTC, HTC, Opportunity Zone, and Brownfield tax credits",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/tcredex-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Submit Deal",
+      "short_name": "Submit",
+      "description": "Submit a new deal to the marketplace",
+      "url": "/intake"
+    },
+    {
+      "name": "View Map",
+      "short_name": "Map",
+      "description": "View the interactive deal map",
+      "url": "/map"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

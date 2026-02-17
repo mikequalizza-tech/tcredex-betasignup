@@ -1,0 +1,72 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Next.js
+.next
+out
+
+# Build
+build
+dist
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+
+# IDE
+.idea
+.vscode
+.vs
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Claude temp files
+tmpclaude-*
+tmp_*.log
+tmp*.log
+
+# TypeScript
+*.tsbuildinfo
+.env*.local
+
+# Workspace config (frontend is NOT a monorepo)
+pnpm-workspace.yaml
+
+# AI agent artifacts (Copilot, Kilo Code, etc.)
+.kilocode/
+.pnpm-approve-builds.json
+AGENTS.md
+COMPLETION_SUMMARY.md
+FIX_SUMMARY.md
+INTEGRATION_TEST.md
+OPTIMIZATION_CHANGELOG.md
+QUICK_START.md
+REVIEW.md
+README_OPTIMIZED.md
+DEVELOPMENT.md
+DOCUMENT_CONTROL_SUMMARY.md
+HEADER_SEARCH_MAP_FIXES.md
+HEADER_SEARCH_MAP_FIXES_SUMMARY.md
+INTEGRATION_FIX_SUMMARY.md
+MAP_LAYER_COLORING_FIX.md
+ROUTE_ANALYSIS_REPORT.md
+TCREDEX_ANALYSIS_REPORT.md
+V1.7_OPTIMIZATION_REPORT.md
+VERCEL_DEPLOYMENT_GUIDE.md

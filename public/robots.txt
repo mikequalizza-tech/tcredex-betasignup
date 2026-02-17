@@ -1,0 +1,80 @@
+# tCredex - Robots.txt
+# Allow indexing of public content, protect authenticated areas
+
+# Allow Google and Bing to crawl public pages
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /closing-room/
+Disallow: /intake/
+Disallow: /messages/
+Disallow: /deals/new
+Disallow: /onboarding/
+Disallow: /investor/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /closing-room/
+Disallow: /intake/
+Disallow: /messages/
+Disallow: /deals/new
+Disallow: /onboarding/
+Disallow: /investor/
+Disallow: /_next/
+Disallow: /admin/
+
+# Default rules for all other bots
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /closing-room/
+Disallow: /intake/
+Disallow: /messages/
+Disallow: /deals/new
+Disallow: /onboarding/
+Disallow: /investor/
+Disallow: /_next/
+Disallow: /admin/
+
+# Block known scraper/AI training bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Sitemap location
+Sitemap: https://tcredex.com/sitemap.xml

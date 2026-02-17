@@ -1,0 +1,28 @@
+'use client';
+
+import { useState } from 'react';
+
+import Link from 'next/link';
+
+type OrgType = 'sponsor' | 'cde' | 'investor' | 'consultant';
+
+const scheduleAnchors: Record<OrgType, string> = {
+  sponsor: '#schedule-sponsor',
+  cde: '#schedule-cde',
+  investor: '#schedule-investor',
+  consultant: '#schedule-consultant',
+};
+
+const scheduleNames: Record<OrgType, string> = {
+  sponsor: 'Schedule A (Sponsors)',
+  cde: 'Schedule B (CDEs)',
+  investor: 'Schedule C (Investors)',
+  consultant: 'Schedule D (Consultants)',
+};
+
+const roleDisplayNames: Record<OrgType, string> = {
+  sponsor: 'Project Sponsor',
+  cde: 'CDE',
+  investor: 'Investor',
+  consultant: 'Consultant',
+};
