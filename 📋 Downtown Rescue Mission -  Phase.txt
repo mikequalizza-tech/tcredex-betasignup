@@ -1,0 +1,35 @@
+📋 Downtown Rescue Mission -  Phase 2 
+📍 Huntsville, Alabama
+💰 Project Cost: $10.5M
+📊 Financing Gap: $2.00M
+🗺️ Census Tract: 01089001301
+
+🔗 {
+  "id": "DEAL-1767726973201",
+  "projectName": "Downtown Rescue Mission -  Phase 2 ",
+  "sponsorName": "John Walsh",
+  "sponsorDescription": " Since 1975, Downtown Rescue Mission (DRM) has been “a heart for the homeless,” providing meals, clothing, housing, recovery programs and counseling. In 2018, they doubled our women-and-children capacity with the new Owen’s House facility—only to hit capacity within months and remain overbooked for five years straight. The Building Hope Phase 2 project addresses this crisis head-on by once again doubling that capacity, ensuring DRM can serve 220 women, moms and kids each night instead of the current 110",
+  "programType": "NMTC",
+  "programLevel": "federal",
+  "allocation": 10000000,
+  "creditPrice": 0.76,
+  "state": "Alabama",
+  "city": "Huntsville",
+  "tractType": [],
+  "status": "available",
+  "description": " Since 1975, Downtown Rescue Mission (DRM) has been “a heart for the homeless,” providing meals, clothing, housing, recovery programs and counseling. In 2018, they doubled our women-and-children capacity with the new Owen’s House facility—only to hit capacity within months and remain overbooked for five years straight. The Building Hope Phase 2 project addresses this crisis head-on by once again doubling that capacity, ensuring DRM can serve 220 women, moms and kids each night instead of the current 110",
+  "communityImpact": "The Downtown Rescue Mission (DMR) is located in a severely distressed census tract with a Poverty Rate of 40.2% and a Median Income of 41.98% with an 18.4% unemployment rate. The expansion and new construction is part of the main location at 1400 Evangel Drive NW in Huntsville, Alabama and is expected to produce over 80 new construction jobs and 40 new permanent jobs. DRM plans to offer area residents Residency-based programs that are aimed at breaking the cycle of alcohol and drug dependency, serving the mentally ill, teaching life skills, and providing residents with supportive services and aftercare to maintain long-term, sustained independence.",
+  "submittedDate": "2026-01-06T19:16:13.201Z",
+  "povertyRate": 40.2,
+  "medianIncome": 42,
+  "visible": true,
+  "coordinates": [
+    -86.64060889999999,
+    34.7404454
+  ],
+  "projectCost": 10500000,
+  "financingGap": 2000000,
+  "censusTract": "01089001301",
+  "unemployment": 18.4,
+  "shovelReady": false
+}View on tCredex: https://tcredex.com/deals/DEAL-1767726973201

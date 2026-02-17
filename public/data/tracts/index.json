@@ -1,0 +1,366 @@
+{
+  "AL": {
+    "name": "Alabama",
+    "totalTracts": 1437,
+    "eligibleTracts": 695,
+    "avgPoverty": 17.9,
+    "avgUnemployment": 6.2
+  },
+  "AK": {
+    "name": "Alaska",
+    "totalTracts": 177,
+    "eligibleTracts": 51,
+    "avgPoverty": 10.8,
+    "avgUnemployment": 7.8
+  },
+  "AZ": {
+    "name": "Arizona",
+    "totalTracts": 1765,
+    "eligibleTracts": 736,
+    "avgPoverty": 14.6,
+    "avgUnemployment": 6.0
+  },
+  "AR": {
+    "name": "Arkansas",
+    "totalTracts": 823,
+    "eligibleTracts": 366,
+    "avgPoverty": 17.3,
+    "avgUnemployment": 5.8
+  },
+  "CA": {
+    "name": "California",
+    "totalTracts": 9129,
+    "eligibleTracts": 3762,
+    "avgPoverty": 13.1,
+    "avgUnemployment": 6.3
+  },
+  "CO": {
+    "name": "Colorado",
+    "totalTracts": 1447,
+    "eligibleTracts": 553,
+    "avgPoverty": 10.5,
+    "avgUnemployment": 4.7
+  },
+  "CT": {
+    "name": "Connecticut",
+    "totalTracts": 883,
+    "eligibleTracts": 316,
+    "avgPoverty": 10.8,
+    "avgUnemployment": 6.2
+  },
+  "DE": {
+    "name": "Delaware",
+    "totalTracts": 262,
+    "eligibleTracts": 89,
+    "avgPoverty": 12.1,
+    "avgUnemployment": 5.8
+  },
+  "DC": {
+    "name": "District Of Columbia",
+    "totalTracts": 206,
+    "eligibleTracts": 92,
+    "avgPoverty": 16.1,
+    "avgUnemployment": 8.4
+  },
+  "FL": {
+    "name": "Florida",
+    "totalTracts": 5160,
+    "eligibleTracts": 1930,
+    "avgPoverty": 13.8,
+    "avgUnemployment": 5.5
+  },
+  "GA": {
+    "name": "Georgia",
+    "totalTracts": 2796,
+    "eligibleTracts": 1302,
+    "avgPoverty": 15.6,
+    "avgUnemployment": 5.8
+  },
+  "HI": {
+    "name": "Hawaii",
+    "totalTracts": 461,
+    "eligibleTracts": 139,
+    "avgPoverty": 9.5,
+    "avgUnemployment": 4.3
+  },
+  "ID": {
+    "name": "Idaho",
+    "totalTracts": 456,
+    "eligibleTracts": 143,
+    "avgPoverty": 12.2,
+    "avgUnemployment": 4.4
+  },
+  "IL": {
+    "name": "Illinois",
+    "totalTracts": 3265,
+    "eligibleTracts": 1321,
+    "avgPoverty": 13.7,
+    "avgUnemployment": 6.7
+  },
+  "IN": {
+    "name": "Indiana",
+    "totalTracts": 1696,
+    "eligibleTracts": 662,
+    "avgPoverty": 14.8,
+    "avgUnemployment": 5.1
+  },
+  "IA": {
+    "name": "Iowa",
+    "totalTracts": 896,
+    "eligibleTracts": 267,
+    "avgPoverty": 12.0,
+    "avgUnemployment": 4.0
+  },
+  "KS": {
+    "name": "Kansas",
+    "totalTracts": 829,
+    "eligibleTracts": 310,
+    "avgPoverty": 12.5,
+    "avgUnemployment": 4.2
+  },
+  "KY": {
+    "name": "Kentucky",
+    "totalTracts": 1306,
+    "eligibleTracts": 645,
+    "avgPoverty": 18.4,
+    "avgUnemployment": 5.9
+  },
+  "LA": {
+    "name": "Louisiana",
+    "totalTracts": 1388,
+    "eligibleTracts": 716,
+    "avgPoverty": 20.2,
+    "avgUnemployment": 7.0
+  },
+  "ME": {
+    "name": "Maine",
+    "totalTracts": 407,
+    "eligibleTracts": 151,
+    "avgPoverty": 12.0,
+    "avgUnemployment": 4.2
+  },
+  "MD": {
+    "name": "Maryland",
+    "totalTracts": 1475,
+    "eligibleTracts": 587,
+    "avgPoverty": 10.1,
+    "avgUnemployment": 5.4
+  },
+  "MA": {
+    "name": "Massachusetts",
+    "totalTracts": 1620,
+    "eligibleTracts": 589,
+    "avgPoverty": 11.1,
+    "avgUnemployment": 5.3
+  },
+  "MI": {
+    "name": "Michigan",
+    "totalTracts": 3017,
+    "eligibleTracts": 1187,
+    "avgPoverty": 15.3,
+    "avgUnemployment": 6.6
+  },
+  "MN": {
+    "name": "Minnesota",
+    "totalTracts": 1505,
+    "eligibleTracts": 561,
+    "avgPoverty": 9.9,
+    "avgUnemployment": 4.0
+  },
+  "MS": {
+    "name": "Mississippi",
+    "totalTracts": 878,
+    "eligibleTracts": 450,
+    "avgPoverty": 20.9,
+    "avgUnemployment": 7.7
+  },
+  "MO": {
+    "name": "Missouri",
+    "totalTracts": 1654,
+    "eligibleTracts": 724,
+    "avgPoverty": 14.3,
+    "avgUnemployment": 4.8
+  },
+  "MT": {
+    "name": "Montana",
+    "totalTracts": 319,
+    "eligibleTracts": 110,
+    "avgPoverty": 13.4,
+    "avgUnemployment": 4.4
+  },
+  "NE": {
+    "name": "Nebraska",
+    "totalTracts": 553,
+    "eligibleTracts": 181,
+    "avgPoverty": 11.2,
+    "avgUnemployment": 3.4
+  },
+  "NV": {
+    "name": "Nevada",
+    "totalTracts": 779,
+    "eligibleTracts": 270,
+    "avgPoverty": 13.3,
+    "avgUnemployment": 6.7
+  },
+  "NH": {
+    "name": "New Hampshire",
+    "totalTracts": 350,
+    "eligibleTracts": 110,
+    "avgPoverty": 7.9,
+    "avgUnemployment": 3.7
+  },
+  "NJ": {
+    "name": "New Jersey",
+    "totalTracts": 2181,
+    "eligibleTracts": 757,
+    "avgPoverty": 10.5,
+    "avgUnemployment": 6.1
+  },
+  "NM": {
+    "name": "New Mexico",
+    "totalTracts": 612,
+    "eligibleTracts": 299,
+    "avgPoverty": 19.6,
+    "avgUnemployment": 6.9
+  },
+  "NY": {
+    "name": "New York",
+    "totalTracts": 5411,
+    "eligibleTracts": 2208,
+    "avgPoverty": 14.1,
+    "avgUnemployment": 5.8
+  },
+  "NC": {
+    "name": "North Carolina",
+    "totalTracts": 2672,
+    "eligibleTracts": 1150,
+    "avgPoverty": 14.8,
+    "avgUnemployment": 5.6
+  },
+  "ND": {
+    "name": "North Dakota",
+    "totalTracts": 228,
+    "eligibleTracts": 59,
+    "avgPoverty": 11.1,
+    "avgUnemployment": 3.1
+  },
+  "OH": {
+    "name": "Ohio",
+    "totalTracts": 3168,
+    "eligibleTracts": 1300,
+    "avgPoverty": 15.7,
+    "avgUnemployment": 6.1
+  },
+  "OK": {
+    "name": "Oklahoma",
+    "totalTracts": 1205,
+    "eligibleTracts": 505,
+    "avgPoverty": 16.4,
+    "avgUnemployment": 5.4
+  },
+  "OR": {
+    "name": "Oregon",
+    "totalTracts": 1001,
+    "eligibleTracts": 379,
+    "avgPoverty": 12.8,
+    "avgUnemployment": 5.5
+  },
+  "PA": {
+    "name": "Pennsylvania",
+    "totalTracts": 3446,
+    "eligibleTracts": 1285,
+    "avgPoverty": 13.0,
+    "avgUnemployment": 5.6
+  },
+  "RI": {
+    "name": "Rhode Island",
+    "totalTracts": 250,
+    "eligibleTracts": 77,
+    "avgPoverty": 11.9,
+    "avgUnemployment": 5.7
+  },
+  "SC": {
+    "name": "South Carolina",
+    "totalTracts": 1323,
+    "eligibleTracts": 590,
+    "avgPoverty": 16.3,
+    "avgUnemployment": 5.9
+  },
+  "SD": {
+    "name": "South Dakota",
+    "totalTracts": 242,
+    "eligibleTracts": 81,
+    "avgPoverty": 13.6,
+    "avgUnemployment": 3.9
+  },
+  "TN": {
+    "name": "Tennessee",
+    "totalTracts": 1701,
+    "eligibleTracts": 742,
+    "avgPoverty": 16.1,
+    "avgUnemployment": 5.8
+  },
+  "TX": {
+    "name": "Texas",
+    "totalTracts": 6896,
+    "eligibleTracts": 3149,
+    "avgPoverty": 15.3,
+    "avgUnemployment": 5.4
+  },
+  "UT": {
+    "name": "Utah",
+    "totalTracts": 716,
+    "eligibleTracts": 206,
+    "avgPoverty": 9.9,
+    "avgUnemployment": 3.6
+  },
+  "VT": {
+    "name": "Vermont",
+    "totalTracts": 193,
+    "eligibleTracts": 49,
+    "avgPoverty": 11.0,
+    "avgUnemployment": 3.7
+  },
+  "VA": {
+    "name": "Virginia",
+    "totalTracts": 2198,
+    "eligibleTracts": 964,
+    "avgPoverty": 11.0,
+    "avgUnemployment": 4.8
+  },
+  "WA": {
+    "name": "Washington",
+    "totalTracts": 1784,
+    "eligibleTracts": 681,
+    "avgPoverty": 10.9,
+    "avgUnemployment": 5.0
+  },
+  "WV": {
+    "name": "West Virginia",
+    "totalTracts": 546,
+    "eligibleTracts": 258,
+    "avgPoverty": 18.3,
+    "avgUnemployment": 7.0
+  },
+  "WI": {
+    "name": "Wisconsin",
+    "totalTracts": 1542,
+    "eligibleTracts": 512,
+    "avgPoverty": 12.3,
+    "avgUnemployment": 3.9
+  },
+  "WY": {
+    "name": "Wyoming",
+    "totalTracts": 160,
+    "eligibleTracts": 44,
+    "avgPoverty": 11.2,
+    "avgUnemployment": 4.6
+  },
+  "PR": {
+    "name": "Puerto Rico",
+    "totalTracts": 981,
+    "eligibleTracts": 857,
+    "avgPoverty": 44.6,
+    "avgUnemployment": 15.2
+  }
+}

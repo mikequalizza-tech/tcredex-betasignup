@@ -1,0 +1,43 @@
+/* app/globals.css */
+@import "./css/style.css";
+@import "./css/additional-styles/custom-fonts.css";
+
+/* Mapbox popup custom styles */
+.mapboxgl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.mapboxgl-popup-tip {
+  display: none !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: #9ca3af !important;
+  font-size: 18px !important;
+  padding: 4px 8px !important;
+  right: 4px !important;
+  top: 4px !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  color: #fff !important;
+  background: rgba(99, 102, 241, 0.3) !important;
+  border-radius: 4px;
+}
+
+.deal-popup .mapboxgl-popup-content,
+.tract-popup .mapboxgl-popup-content {
+  background: transparent !important;
+}
+
+/* Deal marker animations */
+.deal-marker-container {
+  cursor: pointer;
+}
+
+.deal-marker-container:hover .deal-marker {
+  transform: scale(1.25);
+}

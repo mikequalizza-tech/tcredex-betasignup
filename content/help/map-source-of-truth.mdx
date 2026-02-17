@@ -1,0 +1,191 @@
+---
+title: "The Map: Your Source of Truth"
+updatedAt: "2025-01-19"
+summary: "How tCredex's interactive map provides real-time eligibility data and drives the entire platform."
+image: "/images/Tax Credit Images/The Data Driven Developer.jpg"
+---
+
+## The Map is Everything
+
+The tCredex map isn't just a visual tool—it's the foundation of the entire platform. Every eligibility determination, every match score, and every compliance check traces back to the map.
+
+---
+
+## What the Map Shows
+
+### Census Tract Eligibility
+
+Every census tract in the United States is classified:
+
+| Layer | What It Shows |
+|-------|---------------|
+| **NMTC Eligible** | Tracts qualifying for New Markets Tax Credits |
+| **Severely Distressed** | High-priority NMTC tracts with deeper need |
+| **Opportunity Zones** | Designated OZ tracts for capital gains benefits |
+| **QCT (Qualified Census Tracts)** | LIHTC bonus areas |
+| **State Programs** | State-specific tax credit eligibility |
+
+### Distress Indicators
+
+Each tract displays:
+- **Poverty Rate** - Percentage below poverty line
+- **Median Family Income** - As % of area median
+- **Unemployment Rate** - Local jobless rate
+- **Classification** - Urban, rural, tribal
+
+---
+
+## How the Map Drives the System
+
+### 1. Address Lookup → Instant Eligibility
+
+When a Sponsor enters a project address:
+
+1. System geocodes the address to coordinates
+2. Coordinates map to a census tract (GEOID)
+3. Tract data returns eligibility for ALL programs
+4. DealCard auto-populates with tract information
+
+**No manual eligibility research needed.** The map tells you instantly what programs your project qualifies for.
+
+### 2. Tract Data → Match Scoring
+
+AutoMatch uses tract data to score matches:
+
+- CDE prefers severely distressed tracts? Projects in those tracts score higher.
+- Investor focuses on Opportunity Zones? OZ-eligible projects surface first.
+- State program available? System flags state credit opportunities.
+
+### 3. Map Exploration → Deal Discovery
+
+CDEs and Investors can:
+
+- Browse the map to find eligible areas
+- Filter by distress level, program, or state
+- Click tracts to see active projects
+- Identify underserved markets with allocation need
+
+---
+
+## Eligibility Layers Explained
+
+### NMTC Eligibility
+
+A tract qualifies for NMTC if it meets ANY of these:
+- Poverty rate ≥ 20%
+- Median income ≤ 80% of area median
+- Unemployment ≥ 1.5x national average
+
+**Severely Distressed** tracts have even deeper indicators—CDEs often prioritize these.
+
+### Opportunity Zones
+
+Designated by governors in 2018, OZ tracts offer:
+- Capital gains deferral
+- Step-up in basis after 5/7 years
+- Tax-free appreciation after 10 years
+
+### Qualified Census Tracts (QCT)
+
+For LIHTC, QCTs provide:
+- 30% basis boost for 9% and 4% deals
+- Higher credit value per unit
+
+### State Programs
+
+Each state has unique programs with their own eligible areas. The map shows:
+- State NMTC programs
+- State HTC programs
+- Brownfield incentives
+- Other state-specific credits
+
+---
+
+## Using the Map
+
+### Basic Navigation
+
+- **Zoom** - Scroll or pinch to zoom in/out
+- **Pan** - Click and drag to move
+- **Click** - Select a tract to see details
+- **Search** - Enter address to jump to location
+
+### Layer Controls
+
+Toggle layers on/off to see:
+- NMTC eligibility
+- Severely distressed
+- Opportunity Zones
+- QCTs
+- State programs
+
+### Tract Details Panel
+
+Clicking a tract shows:
+- GEOID (census tract number)
+- County and state
+- All eligibility flags
+- Distress metrics
+- Active projects in that tract
+
+---
+
+## Data Sources
+
+The map aggregates authoritative federal data:
+
+| Data | Source | Update Frequency |
+|------|--------|------------------|
+| Census Tracts | US Census Bureau | Decennial |
+| NMTC Eligibility | CDFI Fund | Annual |
+| Opportunity Zones | IRS | Fixed (2018) |
+| QCTs/DDAs | HUD | Annual |
+| Poverty/Income | ACS 5-Year | Annual |
+
+---
+
+## Why This Matters
+
+### For Sponsors
+
+- Know instantly if your project qualifies
+- See ALL available programs in one view
+- No more manual tract research
+
+### For CDEs
+
+- Find projects in your target areas
+- Verify eligibility before engagement
+- Track deployment geography
+
+### For Investors
+
+- Filter opportunities by location criteria
+- Verify CRA eligibility
+- Map portfolio geography
+
+---
+
+## The Map is the Source of Truth
+
+Every data point flows from the map:
+
+```
+MAP DATA
+   │
+   ├── Intake Form (auto-populates eligibility)
+   │
+   ├── DealCard (displays tract info)
+   │
+   ├── AutoMatch (scores geographic fit)
+   │
+   └── Compliance (verifies requirements)
+```
+
+When the map says a tract is eligible, the system treats it as eligible. When the map shows distress metrics, those drive scoring. The map is not decorative—it's authoritative.
+
+---
+
+## Need Help?
+
+Contact **support@tcredex.com** for map assistance.

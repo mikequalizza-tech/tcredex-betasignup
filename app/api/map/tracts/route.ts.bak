@@ -1,0 +1,361 @@
+/**
+ * Unified Map Tracts API
+ * ======================
+ * Single SOURCE OF TRUTH: census_tracts table
+ * Contains: geoid, geom, LIHTC QCT, OZ, State NMTC/HTC/Brownfield
+ *
+ * NO EXTERNAL API CALLS - all data from local Supabase database
+ *
+ * Endpoints:
+ *   GET /api/map/tracts?bbox=minLng,minLat,maxLng,maxLat  - Get tracts in viewport
+ *   GET /api/map/tracts?geoid=12345678901                 - Get single tract
+ *   GET /api/map/tracts?lat=39.5&lng=-98.5                - Get tract at coordinates
+ *   GET /api/map/tracts?centroids=true&bbox=...           - Get centroids only (fast)
+ *   GET /api/map/tracts?state=California                  - Get tracts by state
+ */
+
+import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseAdmin } from '@/lib/supabase';
+
+export const dynamic = 'force-dynamic';
+
+interface TractRow {
+  geoid: string;
+  geom_json: string;
+  state_name: string;
+  county_name: string;
+  is_lihtc_qct: boolean;
+  is_oz_designated: boolean;
+  has_state_nmtc: boolean;
+  has_state_htc: boolean;
+  has_brownfield_credit: boolean;
+  state_nmtc_transferable?: boolean;
+  state_htc_transferable?: boolean;
+  state_htc_refundable?: boolean;
+  has_state_oz_conformity?: boolean;
+  has_state_lihtc?: boolean;
+  severely_distressed?: boolean;
+  poverty_rate?: number;
+  median_family_income_pct?: number;
+  unemployment_rate?: number;
+}
+
+interface CentroidRow {
+  geoid: string;
+  lat: number;
+  lng: number;
+  is_lihtc_qct: boolean;
+  is_oz_designated: boolean;
+  has_state_nmtc: boolean;
+  has_state_htc: boolean;
+  severely_distressed?: boolean;
+}
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const bbox = searchParams.get('bbox');
+  const geoid = searchParams.get('geoid');
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
+  const state = searchParams.get('state');
+  const simplified = searchParams.get('simplified') === 'true';  // Use simplified geom for low zoom
+  const centroids = searchParams.get('centroids') === 'true';  // Legacy, use simplified instead
+  // No limit - database is fast, load all tracts in viewport
+
+  try {
+    const supabase = getSupabaseAdmin();
+
+    // ===========================================
+    // Option 1: Get single tract by GEOID
+    // ===========================================
+    if (geoid) {
+      const cleanGeoid = geoid.replace(/[-\s]/g, '').padStart(11, '0');
+
+      const { data, error } = await supabase.rpc('get_tract_by_geoid', {
+        p_geoid: cleanGeoid
+      });
+
+      if (error) {
+        console.error('[MapTracts] GEOID lookup error:', error);
+        // Fallback to direct query
+        return await fallbackGeoidQuery(supabase, cleanGeoid);
+      }
+
+      if (!data || data.length === 0) {
+        return NextResponse.json({
+          type: 'FeatureCollection',
+          features: [],
+          error: 'Tract not found'
+        });
+      }
+
+      const tract = data[0] as TractRow;
+      return NextResponse.json({
+        type: 'FeatureCollection',
+        features: [mapRowToFeature(tract)],
+        source: 'census_tracts'
+      });
+    }
+
+    // ===========================================
+    // Option 2: Get tract at coordinates
+    // ===========================================
+    if (lat && lng) {
+      const latNum = parseFloat(lat);
+      const lngNum = parseFloat(lng);
+
+      if (isNaN(latNum) || isNaN(lngNum)) {
+        return NextResponse.json({ error: 'Invalid coordinates' }, { status: 400 });
+      }
+
+      const { data, error } = await supabase.rpc('get_tract_from_coordinates', {
+        p_lat: latNum,
+        p_lng: lngNum
+      });
+
+      if (error) {
+        console.error('[MapTracts] Coordinate lookup error:', error);
+        return NextResponse.json({
+          type: 'FeatureCollection',
+          features: [],
+          error: 'Lookup failed - ensure PostGIS functions exist'
+        });
+      }
+
+      if (!data || data.length === 0) {
+        return NextResponse.json({
+          type: 'FeatureCollection',
+          features: [],
+          message: 'No tract found at coordinates'
+        });
+      }
+
+      const tract = data[0] as TractRow;
+      return NextResponse.json({
+        type: 'FeatureCollection',
+        features: [mapRowToFeature(tract)],
+        source: 'census_tracts'
+      });
+    }
+
+    // ===========================================
+    // Option 3: Get tracts by state name
+    // ===========================================
+    if (state) {
+      const { data, error } = await supabase.rpc('get_tracts_by_state', {
+        p_state_name: state,
+        p_limit: 100000
+      });
+
+      if (error) {
+        console.error('[MapTracts] State query error:', error);
+        return NextResponse.json({ type: 'FeatureCollection', features: [] });
+      }
+
+      const features = (data || []).map((row: TractRow) => mapRowToFeature(row));
+
+      return NextResponse.json({
+        type: 'FeatureCollection',
+        features,
+        count: features.length,
+        source: 'census_tracts'
+      });
+    }
+
+    // ===========================================
+    // Option 4: Get tracts in bounding box
+    // ===========================================
+    if (bbox) {
+      const [minLng, minLat, maxLng, maxLat] = bbox.split(',').map(Number);
+
+      if ([minLng, minLat, maxLng, maxLat].some(isNaN)) {
+        return NextResponse.json(
+          { error: 'Invalid bbox format. Use: minLng,minLat,maxLng,maxLat' },
+          { status: 400 }
+        );
+      }
+
+// For zoomed-out view, use simplified geometries (still polygons, but ~95% smaller)      if (simplified) {        const { data, error } = await supabase.rpc('get_simplified_tracts_in_bbox', {          p_min_lng: minLng,          p_min_lat: minLat,          p_max_lng: maxLng,          p_max_lat: maxLat        });        if (error) {          console.error('[MapTracts] Simplified bbox error:', error);          // Fall back to full polygons below        } else {          const features = (data || []).map((row: TractRow) => mapRowToFeature(row));          console.log(`[MapTracts] Returned ${features.length} simplified tracts for bbox`);          return NextResponse.json({            type: 'FeatureCollection',            features,            count: features.length,            source: 'census_tracts',            mode: 'simplified'          });        }      }      // Full detailed polygons for zoomed-in view or address lookup
+      const { data, error } = await supabase.rpc('get_map_tracts_in_bbox', {
+        p_min_lng: minLng,
+        p_min_lat: minLat,
+        p_max_lng: maxLng,
+        p_max_lat: maxLat,
+        p_limit: 100000
+      });
+
+      if (error) {
+        console.error('[MapTracts] BBox error:', error);
+        return await fallbackBboxQuery(supabase);
+      }
+
+      const features = (data || []).map((row: TractRow) => mapRowToFeature(row));
+
+      console.log(`[MapTracts] Returned ${features.length} tracts for bbox`);
+
+      return NextResponse.json({
+        type: 'FeatureCollection',
+        features,
+        count: features.length,
+        source: 'census_tracts',
+        mode: 'polygons'
+      });
+    }
+
+    // No valid parameters
+    return NextResponse.json({
+      error: 'Missing required parameter',
+      usage: {
+        bbox: '/api/map/tracts?bbox=-90.5,38.5,-89.5,39.5',
+        geoid: '/api/map/tracts?geoid=29189010100',
+        coordinates: '/api/map/tracts?lat=38.6&lng=-90.2',
+        state: '/api/map/tracts?state=California',
+        centroids: '/api/map/tracts?centroids=true&bbox=-100,30,-80,45'
+      }
+    }, { status: 400 });
+
+  } catch (error) {
+    console.error('[MapTracts] Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch tracts', details: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
+function buildProgramsArray(row: Partial<TractRow>): string[] {
+  const programs: string[] = [];
+  if (row.severely_distressed) programs.push('Severely Distressed');
+  if (row.is_lihtc_qct) programs.push('LIHTC QCT');
+  if (row.is_oz_designated) programs.push('Opportunity Zone');
+  if (row.has_state_nmtc) programs.push('State NMTC');
+  if (row.has_state_htc) programs.push('State HTC');
+  if (row.has_brownfield_credit) programs.push('Brownfield');
+  return programs;
+}
+
+function mapRowToFeature(row: TractRow) {
+  const programs = buildProgramsArray(row);
+  const eligible = row.is_lihtc_qct || row.is_oz_designated || row.has_state_nmtc || row.has_state_htc;
+
+  return {
+    type: 'Feature',
+    id: row.geoid,
+    properties: {
+      geoid: row.geoid,
+      GEOID: row.geoid,
+      state_name: row.state_name,
+      county_name: row.county_name,
+      // Tax credit flags
+      is_lihtc_qct: row.is_lihtc_qct,
+      is_oz_designated: row.is_oz_designated,
+      has_state_nmtc: row.has_state_nmtc,
+      has_state_htc: row.has_state_htc,
+      has_brownfield_credit: row.has_brownfield_credit,
+      // Distress indicators
+      severely_distressed: row.severely_distressed,
+      poverty_rate: row.poverty_rate,
+      median_family_income_pct: row.median_family_income_pct,
+      unemployment_rate: row.unemployment_rate,
+      // Transferability
+      state_nmtc_transferable: row.state_nmtc_transferable,
+      state_htc_transferable: row.state_htc_transferable,
+      state_htc_refundable: row.state_htc_refundable,
+      // Computed
+      eligible,
+      programs: JSON.stringify(programs),
+      program_count: programs.length
+    },
+    geometry: row.geom_json ? JSON.parse(row.geom_json) : null
+  };
+}
+
+async function fallbackGeoidQuery(supabase: any, cleanGeoid: string) {
+  const { data, error } = await supabase
+    .from('census_tracts')
+    .select('geoid, geom, state_name, county_name, is_lihtc_qct, is_oz_designated, has_state_nmtc, has_state_htc, has_brownfield_credit')
+    .eq('geoid', cleanGeoid)
+    .single();
+
+  if (error || !data) {
+    return NextResponse.json({
+      type: 'FeatureCollection',
+      features: [],
+      error: 'Tract not found'
+    });
+  }
+
+  const geometry = typeof data.geom === 'string' ? JSON.parse(data.geom) : data.geom;
+  const programs = buildProgramsArray(data);
+
+  return NextResponse.json({
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      id: data.geoid,
+      properties: {
+        geoid: data.geoid,
+        GEOID: data.geoid,
+        state_name: data.state_name,
+        county_name: data.county_name,
+        is_lihtc_qct: data.is_lihtc_qct,
+        is_oz_designated: data.is_oz_designated,
+        has_state_nmtc: data.has_state_nmtc,
+        has_state_htc: data.has_state_htc,
+        has_brownfield_credit: data.has_brownfield_credit,
+        eligible: data.is_lihtc_qct || data.is_oz_designated || data.has_state_nmtc,
+        programs: JSON.stringify(programs)
+      },
+      geometry
+    }],
+    source: 'census_tracts',
+    mode: 'fallback'
+  });
+}
+
+async function fallbackBboxQuery(supabase: any) {
+  console.log('[MapTracts] Using fallback direct query');
+
+  const { data, error } = await supabase
+    .from('census_tracts')
+    .select('geoid, geom, state_name, county_name, is_lihtc_qct, is_oz_designated, has_state_nmtc, has_state_htc, has_brownfield_credit')
+    .not('geom', 'is', null)
+    .limit(100000);
+
+  if (error) {
+    console.error('[MapTracts] Fallback query error:', error);
+    return NextResponse.json({ type: 'FeatureCollection', features: [] });
+  }
+
+  const features = (data || []).map((row: any) => {
+    const geometry = typeof row.geom === 'string' ? JSON.parse(row.geom) : row.geom;
+    const programs = buildProgramsArray(row);
+
+    return {
+      type: 'Feature',
+      id: row.geoid,
+      properties: {
+        geoid: row.geoid,
+        GEOID: row.geoid,
+        state_name: row.state_name,
+        county_name: row.county_name,
+        is_lihtc_qct: row.is_lihtc_qct,
+        is_oz_designated: row.is_oz_designated,
+        has_state_nmtc: row.has_state_nmtc,
+        has_state_htc: row.has_state_htc,
+        has_brownfield_credit: row.has_brownfield_credit,
+        eligible: row.is_lihtc_qct || row.is_oz_designated || row.has_state_nmtc,
+        programs: JSON.stringify(programs)
+      },
+      geometry
+    };
+  });
+
+  return NextResponse.json({
+    type: 'FeatureCollection',
+    features,
+    count: features.length,
+    source: 'census_tracts',
+    mode: 'fallback'
+  });
+}
