@@ -75,7 +75,6 @@ interface HomeMapWithTractsProps {
   onTractSelect?: (tract: TractData | null) => void;
   searchedLocation?: { lat: number; lng: number; tract?: string; address?: string } | null;
   deals?: Deal[];
-  allocations?: unknown[];
 }
 
 const PIN_COLORS: Record<string, string> = {
@@ -96,7 +95,6 @@ export default function HomeMapWithTracts({
   onTractSelect,
   searchedLocation,
   deals: initialDeals,
-  allocations: _allocations,
 }: HomeMapWithTractsProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
